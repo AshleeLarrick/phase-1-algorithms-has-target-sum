@@ -1,17 +1,46 @@
 function hasTargetSum(array, target) {
   // Write your algorithm here
-}
+  //[3, 8, 12, 4, 11, 7] and the target is 10
+  for (let i = 0; i < array.length; i++) {
+    let sum = 0
+    sum += array[i] //3
+    for (let j = 0; j < array.length; j++) {
+      if (i != j) {
+        sum += array[j] //3 + 7
+        if(sum == target) {
+          return true
+        }
+        else {
+          sum -= array[j] // 3
+        }
+      }
+    }
+  }
+  return false
 
+}
 /* 
-  Write the Big O time complexity of your function here
+O(n^2)
 */
 
 /* 
-  Add your pseudocode here
+  For each element in the array:
+    Initialize the sum to 0
+    Add to the sum the current element
+      For each element in the array:
+        If the current index is not the same as the outer index:
+          Add to the sum the inner element (of our for loop)
+          If the sum is equal to the target:
+            Return True
+          Otherwise:
+            Subtract the inner element from the sum to reset
+  Return false if sum never matched target
 */
 
 /*
-  Add written explanation of your solution here
+  Takes in the first element of the array and adds it to the rest of the elements 
+  one by one to reach the target sum. If equal it returns true, if it does not
+  equal the target sum it moves to the second element in the array.
 */
 
 // You can run `node index.js` to view these console logs
@@ -29,6 +58,12 @@ if (require.main === module) {
 
   console.log("Expecting: false");
   console.log("=>", hasTargetSum([1, 2, 5], 4));
+
+  console.log("Expecting: true");
+  console.log("=>", hasTargetSum([8, 8, 2, 5, 11, 2], 10));
+
+  console.log("");
+
 }
 
 module.exports = hasTargetSum;
